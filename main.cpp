@@ -25,12 +25,14 @@ void OpenSSLDecryptor::decrypt(const QByteArray &cypheredInput,
 		qDebug() << "init(): digest does not exist ";
 	QByteArray tempPassword = password.toLatin1();
 	const char *pass = tempPassword.constData();
-	EVP_BytesToKey(cipher, // cipher type
-			digest, // message digest
-			salt, // 8 bytes
-			(uchar*)pass, // pass value
-			strlen(pass), 1,
-			number of rounds (uchar*)m_key, (uchar*)m_iv);
+	EVP_BytesToKey(cipher,
+                digest, 
+                salt,   
+                (uchar*)pass,
+                strlen(pass),
+                1,  
+                (uchar*)m_key,
+                (uchar*)m_iv);
 	uint SZ = readSize + 20;
 	uchar* plaintext = new uchar[SZ];
 	bzero(plaintext, SZ);
